@@ -1,0 +1,20 @@
+{
+  "name": "chat-iruzo",
+  "version": "0.0.1",
+  "description": "chat-iruzo",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "chat-iruzo"
+  ],
+  "author": "Iván Ruzo Vázquez",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^6.1.2"
+  },
+  "dependencies": {
+    "log4js": "^5.3.0"
+  }
+}
