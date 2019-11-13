@@ -1,12 +1,15 @@
+const log4js = require('log4js');
+const logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
+logger.level = "debug";
 
-const controller = require('../controllers/controller');
+const manager = require('../app/manager');
 
 function init() {
-    var log4js = require('log4js');
-    var logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
-    console.log('aaa');
-    logger.debug('aaaaaaaaaaaaaaa');
-    setTimeout(() => {new controller.Controller();}, 500);
+    logger.debug("init ...");
+    manager.init();
 }
 
+function getArp() { return manager.getArp(); }
+
 module.exports.init = init;
+module.exports.getArp = getArp;

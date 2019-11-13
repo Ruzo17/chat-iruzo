@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>main</title>
+
+    <link rel="stylesheet" type="text/css" href="../themes/console.css">
+
+    <script type="text/javascript" src="console.js"></script>
+
+    <title>chat-iruzo</title>
 </head>
 <body>
-    <textarea readonly class='consoleText' name="consoleOutput" id="consoleOutput" cols="200" rows="30" style="height: 75%; width: 90%; padding-right: 9.5%"></textarea>
-    <textarea          class='consoleText' name="consoleInput"  id="consoleInput"  cols="200" rows="1"  style="width: 90%; padding-right: 9.5%" onKeydown="Javascript: if (event.keyCode==13) send(this)"></textarea>
+    <div style="display: flex;">
+        <textarea readonly class='consoleText' name="net" id="net" cols="50"  rows="31" style="width: 90%; padding-right: 9.5%" onclick="getArp()"></textarea>
+        <div>
+            <textarea readonly class='consoleText' name="consoleOutput" id="consoleOutput" cols="200" rows="30" style="width: 90%; padding-right: 9.5%"></textarea>
+            <textarea          class='consoleText' name="consoleInput"  id="consoleInput"  cols="200" rows="1"  style="width: 90%; padding-right: 9.5%" onKeydown="Javascript: if (event.keyCode==13) send(this)" ></textarea>
+        </div>
+    </div>
 </body>
-<script type="text/javascript" src="console.js"></script>
 </html>
