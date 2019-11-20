@@ -19,19 +19,16 @@ function createWindow () {
   var logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
   logger.level = 'debug';
   logger.debug(arguments.callee.name, '... ');
-
-  
-  serverApi.init();
-  
   
   win.loadFile('src/gui/view/console.html');
   
-//   win.webContents.openDevTools()
-
+  //   win.webContents.openDevTools()
+  
   win.on('closed', () => {
     win = null
   })
 }
+
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {

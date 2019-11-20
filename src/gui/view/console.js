@@ -3,7 +3,9 @@ const log4js = require('log4js');
 const logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
 logger.level = "debug";
 
-const srvApi = require('../../server/api/api')
+const srvApi = require('../../server/api/api');
+
+srvApi.init();
 
 function send(consoleInput) {
     logger.debug(arguments.callee.name, '... ');

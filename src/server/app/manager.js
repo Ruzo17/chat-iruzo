@@ -9,15 +9,28 @@ const memory = require('../models/memory');
 
 function init() {
     logger.debug("init ...");
-    new controller.Controller();
+    let oController = new controller.Controller();
     memory.init();
 }
 
+
+//useCases
+function netScan() { ipScan.netScan(); }
 function getArp()    { return ipScan.arp(); }
+function notifyInitialLocalNetConnection() {
+
+}
+
+//memory
 function getMemoryArpList() { return memory.getArpList(); }
 function setMemoryArpList(args) { memory.setArpList(args); }
 
 module.exports.init = init;
+
+//useCases
+module.exports.netScan = netScan;
 module.exports.getArp = getArp;
+
+//memory
 module.exports.getMemoryArpList = getMemoryArpList;
 module.exports.setMemoryArpList = setMemoryArpList;

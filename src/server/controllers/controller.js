@@ -7,8 +7,9 @@ logger.level = "debug";
 
 class Controller{
     updateIps() {
-        manager.setMemoryArpList(manager.getArp());
-        logger.debug('updateIps ... ', manager.getMemoryArpList())
+        logger.debug('updateIps ... ');
+        // manager.netScan();
+        setInterval(()=>{manager.setMemoryArpList(manager.getArp())}, 5000);
     }
     constructor(){
         logger.debug('constructor ... ');
