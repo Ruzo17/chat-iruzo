@@ -3,16 +3,22 @@ const log4js = require('log4js');
 const logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
 logger.level = "debug";
 
-arpList = new Array();
+ipList = new Array();
 
 function init() {
-    logger.debug(arguments.callee.name, '... ');
+    logger.debug(arguments.callee.name, ' ... ');
 }
 
 module.exports.init = init;
-module.exports.getArpList = function () {
-    return arpList;
+module.exports.getIpList = function getIrpList() {
+    logger.debug(arguments.callee.name, " ... ", args);
+    return ipList;
 }
-module.exports.setArpList = function (args) {
-    arpList[0] = args;
+module.exports.setIpList = function setIrpList(args) {
+    logger.debug(arguments.callee.name, " ... ", args);
+    ipList = args;
+}
+module.exports.addToIpList = function addToIpList(args) {
+    logger.debug(arguments.callee.name, " ... ", args);
+    ipList.push(args);
 }

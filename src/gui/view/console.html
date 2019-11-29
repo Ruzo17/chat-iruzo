@@ -13,10 +13,10 @@
 </head>
 <body>
     <div style="display: flex;">
-        <textarea readonly class='consoleText' name="net" id="net" cols="50"  rows="31" style="width: 90%; padding-right: 9.5%" onclick="getArp()"></textarea>
+        <textarea readonly class='consoleText' name="net" id="net" cols="50"  rows="31" style="width: 90%; padding-right: 9.5%" onclick="getIpList()"></textarea>
         <div>
             <textarea readonly class='consoleText' name="consoleOutput" id="consoleOutput" cols="200" rows="30" style="width: 90%; padding-right: 9.5%"></textarea>
-            <textarea          class='consoleText' name="consoleInput"  id="consoleInput"  cols="200" rows="1"  style="width: 90%; padding-right: 9.5%" onKeydown="Javascript: if (event.keyCode==13) send(this)" ></textarea>
+            <textarea          class='consoleText' name="consoleInput"  id="consoleInput"  cols="200" rows="1"  style="width: 90%; padding-right: 9.5%" onKeydown="Javascript: if (event.key=='Enter') send(this)" ></textarea>
         </div>
     </div>
 </body>

@@ -4,7 +4,7 @@ const logger = log4js.getLogger(require('path').basename(__filename).split(".")[
 logger.level = "debug";
 
 const controller = require('../controllers/controller');
-const ipScan = require('./usecases/ipScan');
+const ipScan = require('./usecases/net/ipScan');
 const memory = require('../models/memory');
 
 function init() {
@@ -13,24 +13,28 @@ function init() {
     memory.init();
 }
 
-
 //useCases
-function netScan() { ipScan.netScan(); }
-function getArp()    { return ipScan.arp(); }
+function netScan() { return ipScan.netScan(); }
 function notifyInitialLocalNetConnection() {
 
 }
 
 //memory
-function getMemoryArpList() { return memory.getArpList(); }
-function setMemoryArpList(args) { memory.setArpList(args); }
+function createContact(ip, ipConnectionType, id, name){
+    
+}
+function setContact(contact) {}
+function getIpList() { return memory.getIpList(); }
+function setIpList(args) { memory.setIpList(args); }
+function addToIpList(args) { memory.addToIpList(args); }
 
 module.exports.init = init;
 
 //useCases
 module.exports.netScan = netScan;
-module.exports.getArp = getArp;
 
 //memory
-module.exports.getMemoryArpList = getMemoryArpList;
-module.exports.setMemoryArpList = setMemoryArpList;
+module.exports.setContact = setContact;
+module.exports.getIpList = getIpList;
+module.exports.setIpList = setIpList;
+module.exports.addToIpList = addToIpList;

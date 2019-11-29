@@ -13,10 +13,9 @@ function send(consoleInput) {
     consoleInput.value = '';
 }
 
-function getArp() {
+function getIpList() {
     logger.debug(arguments.callee.name, '... ');
-    logger.info(srvApi.getArp());
-    document.getElementById('net').innerHTML = srvApi.getArp();
+    document.getElementById('net').innerHTML = srvApi.getIpList();
 }
 
-module.exports.getArp = getArp;
+module.exports.getIpList = getIpList;

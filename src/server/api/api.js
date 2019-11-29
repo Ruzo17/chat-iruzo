@@ -9,7 +9,7 @@ function init() {
     manager.init();
 }
 
-function getArp() { return manager.getMemoryArpList(); }
+function getIpList() { return manager.getIpList(); }
 
 module.exports.init = init;
-module.exports.getArp = getArp;
+module.exports.getIpList = getIpList;
