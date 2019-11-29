@@ -12,7 +12,7 @@
   "author": "Iván Ruzo Vázquez",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^6.1.2"
+    "electron": "^6.1.5"
   },
   "dependencies": {
     "log4js": "^5.3.0"
