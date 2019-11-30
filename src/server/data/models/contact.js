@@ -1,12 +1,13 @@
 class Contact {
     ip;
-    ipConnectionType;
+    port;
     id;
-    name;
+    userName;
+    nickName;
+    alias;
 
-    constructor(ip, ipConnectionType, id, name) {
+    constructor(ip, id, userName, nickName, alias) {
         this.ip = ip;
-        this.ipConnectionType = ipConnectionType;
         this.id = id;
         this.name = name;
     }

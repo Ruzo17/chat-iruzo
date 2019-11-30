@@ -1,6 +1,3 @@
-var serverApi = require('./src/server/api/api.js');
-var console = require('./src/gui/view/console.js');
-
 const { app, BrowserWindow } = require('electron')
 
 let win
@@ -16,7 +13,7 @@ function createWindow () {
   win.setMenu(null);
   
   var log4js = require('log4js');
-  var logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
+  var logger = log4js.getLogger('['+process.pid+'] ' + require('path').basename(__filename).split(".")[0]);
   logger.level = 'debug';
   logger.debug(arguments.callee.name, '... ');
   

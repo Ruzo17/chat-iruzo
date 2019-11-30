@@ -2,14 +2,16 @@ const log4js = require('log4js');
 
 const manager = require('../app/manager');
 
-const logger = log4js.getLogger(require('path').basename(__filename).split(".")[0]);
+const logger = log4js.getLogger('['+process.pid+'] ' + require('path').basename(__filename).split(".")[0]);
 logger.level = "debug";
 
 class Controller{
     updateIps() {
         logger.debug('updateIps ... ');
-        manager.netScan();
-        // setInterval(()=>{manager.setIpList(manager.netScan())}, 5000);
+        setInterval(()=>{
+            manager.setIpList(new Array());
+            manager.netScan();
+        }, 10000);
     }
     constructor(){
         logger.debug('constructor ... ');
