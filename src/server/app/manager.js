@@ -5,18 +5,22 @@ logger.level = "debug";
 
 const controller = require('../controllers/controller');
 const ipScan = require('./usecases/net/ipScan');
+const dock = require('./usecases/net/harbor/dock');
 const memory = require('../data/memory');
 
 function init() {
     logger.debug("init ...");
     let oController = new controller.Controller();
+    dock.init();
     memory.init();
 }
 module.exports.init = init;
 
 //useCases
-function netScan() { return ipScan.netScan(); }
-function notifyInitialLocalNetConnection() {
+function getIp(){ return ipScan.getLocalIPv4(); }
+function getSubnet(){ return ipScan.getSubnet(); }
+function netScan() { ipScan.netScan(); }
+function sendDatagramMessage(args) {
 
 }
 
@@ -30,6 +34,8 @@ function addToIpList(args) { memory.addToIpList(args); }
 
 
 //useCases
+module.exports.getIp = getIp;
+module.exports.getSubnet = getSubnet;
 module.exports.netScan = netScan;
 //memory
 module.exports.setContact = setContact;

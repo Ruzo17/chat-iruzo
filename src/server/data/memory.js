@@ -11,8 +11,8 @@ module.exports.init = init;
 ipList = new Array();
 
 // data
-module.exports.getIpList = function getIpList() {logger.debug(arguments.callee.name, " ... ", ipList); return ipList;}
-module.exports.setIpList = function setIpList(args) {logger.debug(arguments.callee.name, " ... ", args); ipList = args;}
-module.exports.addToIpList = function addToIpList(args) {logger.debug(arguments.callee.name, " ... ", args); ipList.push(args);}
+module.exports.getIpList = function getIpList() {ipList.forEach(c => {logger.debug(arguments.callee.name, " ... ", c.toString());}); return ipList;}
+module.exports.setIpList = function setIpList(args) {args.forEach(c => {logger.debug(arguments.callee.name, " ... ", c.toString());}); ipList = args;}
+module.exports.addToIpList = function addToIpList(args) {logger.debug(arguments.callee.name, " ... ", args.toString()); ipList.push(args);}
 // models
 module.exports.contact = contact;

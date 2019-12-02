@@ -20,10 +20,14 @@ function getLocalIPv4() {
   }
 }
 
+function getSubnet() {
+  let ip = getLocalIPv4();
+  return ip.split(".")[0]+"."+ip.split(".")[1]+"."+ip.split(".")[2];
+}
+
 function netScan() {
   logger.debug(arguments.callee.name, '... ');
-  let ip = getLocalIPv4();
-  let subnet = ip.split(".")[0]+"."+ip.split(".")[1]+"."+ip.split(".")[2];
+  let subnet = getSubnet();
   let pingParams = process.platform == 'win32' ? " -w 1000 -f -n 1" :  " -A -c 1";
   for(let i = 0; i<256; i++) {
     try {
@@ -32,10 +36,10 @@ function netScan() {
         if(!(stdout.indexOf('undefined') > -1)){
           if(process.platform == 'win32' && !(stdout.indexOf('Destination host unreachable') > -1)) {
             ipOn = stdout.split('Reply from ')[1].split(':')[0];
-            manager.addToIpList(ipOn);
+            manager.addToIpList(new manager.contact.Contact(ipOn, null, null, null, null, null));
           } else if(stdout.indexOf("ping statistics") > -1) {
             ipOn = stdout.split("(")[1].split(")")[0];
-            manager.addToIpList(ipOn);
+            manager.addToIpList(new manager.contact.Contact(ipOn, null, null, null, null, null));
           }
         }
       });
@@ -46,4 +50,6 @@ function netScan() {
   }
 }
 
+module.exports.getLocalIPv4 = getLocalIPv4;
+module.exports.getSubnet = getSubnet;
 module.exports.netScan = netScan;

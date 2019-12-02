@@ -8,6 +8,7 @@ logger.level = "debug";
 class Controller{
     updateIps() {
         logger.debug('updateIps ... ');
+        manager.netScan();
         setInterval(()=>{
             manager.setIpList(new Array());
             manager.netScan();
