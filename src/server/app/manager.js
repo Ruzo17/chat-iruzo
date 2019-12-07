@@ -6,6 +6,8 @@ logger.level = "debug";
 const controller = require('../controllers/controller');
 const ipScan = require('./usecases/net/ipScan');
 const dock = require('./usecases/net/harbor/dock');
+const crypt = require('./usecases/certs/crypt');
+const files = require('./usecases/accessData/files');
 const memory = require('../data/memory');
 
 function init() {
@@ -23,6 +25,8 @@ function netScan() { ipScan.netScan(); }
 function sendDatagramMessage(args) {
 
 }
+function encrypt(key, args) { return crypt.encrypt(key, args); }
+function decrypt(key, args) { return crypt.decrypt(key, args); }
 
 //memory
 function setContact(contact) {}
