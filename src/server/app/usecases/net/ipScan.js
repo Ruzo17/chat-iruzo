@@ -34,7 +34,6 @@ function netScan() {
           if(process.platform == 'win32' && !(stdout.indexOf('Destination host unreachable') > -1)) {
             ipOn = stdout.split('Reply from ')[1].split(':')[0];
             let containsIp = false;
-            logger.debug(ipOn);
             for (const current in manager.getIpList()) {
               if(current.ip == ipOn){
                 containsIp = true;
