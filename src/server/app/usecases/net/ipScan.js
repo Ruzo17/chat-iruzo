@@ -34,22 +34,23 @@ function netScan() {
           if(process.platform == 'win32' && !(stdout.indexOf('Destination host unreachable') > -1)) {
             ipOn = stdout.split('Reply from ')[1].split(':')[0];
             let containsIp = false;
-            manager.getIpList().forEach(current => {
-              if(current.ip() == ipOn){
+            logger.debug(ipOn);
+            for (const current in manager.getIpList()) {
+              if(current.ip == ipOn){
                 containsIp = true;
                 break;
               }
-            });
+            }
             if(!containsIp) manager.addToIpList(new manager.contact.Contact(ipOn, null, null, null, null, null, null));
           } else if(stdout.indexOf("ping statistics") > -1) {
             ipOn = stdout.split("(")[1].split(")")[0];
             let containsIp = false;
-            manager.getIpList().forEach(current => {
-              if(current.ip() == ipOn){
+            for (const current in manager.getIpList()) {
+              if(current.ip == ipOn){
                 containsIp = true;
                 break;
               }
-            });
+            }
             if(!containsIp) manager.addToIpList(new manager.contact.Contact(ipOn, null, null, null, null, null, null));
           }
         }
