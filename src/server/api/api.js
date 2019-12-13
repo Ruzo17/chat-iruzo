@@ -23,6 +23,8 @@ function registerUser(userName, password) { return manager.processRegisterUser(u
 function loginUser(userName, password) { return manager.processLoginUser(userName, password); }
 function disconnectUser(userName) { return manager.processDisconnectUser(userName); }
 
+function addFriend(contact) { manager.addFriend(contact); }
+
 function getContacts() { return manager.getContacts(); }
 
 
@@ -36,5 +38,7 @@ module.exports.getGlobalChat = getGlobalChat;
 module.exports.registerUser = registerUser;
 module.exports.loginUser = loginUser;
 module.exports.disconnectUser = disconnectUser;
+
+module.exports.addFriend = addFriend;
 
 module.exports.getContacts = getContacts;

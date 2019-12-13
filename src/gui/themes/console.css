@@ -1,32 +1,272 @@
-html, body {
-    background: -webkit-linear-gradient(330deg, #000, #505050);
-    background: linear-gradient(120deg, #000, #3f3f3f);
+@font-face {
+    font-family: "Droid Sans";
+    src: url("DroidSans.ttf");
+}
+*{
+    font-family: Droid Sans;
+}
+*:focus {
+    outline: none;
+}
+html{
+    height: 100%;
+    width: 100%;
     overflow: hidden;
 }
+body {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:100%;
+    overflow: hidden;
+    padding:0;
+    margin: 0;
+}
+body > div {
+    height: 100%;
+    width: 25%;
+}
+.separador {
+    width: 1%;
+    max-width: 2px;
+}
+#sectionl {
+    overflow: auto;
+    width: 25%;
+    background: #23272A;
+    padding: 1%;
+    min-width: 200px;
+    max-width: 192px;
+}
+#sectionc {
+    width: 100%;
+    background: #2C2F33;
+    height: 100%;
+    padding: 0;
+}
+#sectionr {
+    display: flex;
+    flex-direction: column;
+    justify-content:  space-between;
+    background: #23272A;
+    min-width: 200px;
+    max-width: 192px;
+    transition: 300ms;
+}
+.colapsar {
+    min-width: 60px !important;
+    max-width: 60px !important;
+    width: 5%;
 
-#consoleOutput {
-    background: -webkit-linear-gradient(330deg, #000, #505050);
-    background: linear-gradient(120deg, #000, #3f3f3f);
-    border-color: #000;
+}
+#sectionl p, #sectionl div{
+    background: #7289DA;
+    color: #FFFFFF;
+    border-radius: 3px;
+    padding: 5%;
+    text-align: center;
+    cursor: default;
+
+}
+#sectionl div {
+    margin-top:10px;
+
+}
+div#titul {
+    color: #7289DA;
+    background: transparent;
+    border: solid #7289DA;
+    border-radius: 10px;
+
+}
+div#titul:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+    background: #7289DA;
+    border-radius: 10px;
+}
+#term {
+    overflow: auto;
+    height: 90%;
+    padding-left:5%;
+    padding-right:5%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.men {
+    overflow: hidden;
+    width:auto;
+    height: auto;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right:20px;
+    padding-top:10px ;
+    padding-bottom:15px ;
+    margin-top: 10px;
+}
+.sub {
+    background:#99AAB5;
+    color: #FFFFFF;
+    text-align: end;
+}
+.rec {
+    background:rgba(153, 170, 181, 0.418);
+    color: #FFFFFF;
+    text-align: start;
+}
+#formS {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
+}
+#text {
+    width:90%;
+    height: 60%;
+    padding: 5px;
+    color: white;
+    border: none;
+    background: transparent;
+    border-top: solid 1px #18191C;
+}
+#btnColap {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #7289DA;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.colap {
+    background: #7289DA;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    transform: rotate(225deg);
+    border-left: solid black;
+    border-bottom: solid black;
+    transition: 200ms;
+    cursor: pointer;
+}
+.der{
+    transform: rotate(45deg);
+}
+#cabecera {
+    display: flex;
+    justify-content: start;
+    overflow: hidden;
+    align-items: center;
+    height: 67.4px;
+    width: 100%;
+    color: #FFFFFF;
+    background: #18191C;
+}
+#cabecera p{
+    margin-left: 35px;
+}
+#contac {
+    overflow:auto;
+    height: 100%;
+}
+.user {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+.user > div{
+    display: flex;
+    align-items: 0;
+    flex-direction: column;
+}
+.user > div > p{
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+.avatar {
+    border-radius:50%;
+}
+.userName {
+    font-size: 20px;
+    color: #99AAB5;
+}
+.userStat {
+    font-size: 10px;
+    color: #99AAB5;
+}
+#usuario {
+    height: 70px;
+    display: flex;
+    background: #18191C;
+}
+#userE{
+    display: none;
+}
+#log {
+    display: none;
+    margin-left: 10px;
+    flex-direction: column;
+}
+#log input {
+    background: transparent;
+    text-align: center;
+    transition: 0.4s;
+    width: 80%;
+    align-self: center;
+    border:none;
+    color: #909090;
+    border-bottom: solid 1px #909090;
+}
+#choose {
+    display: block;
+    transition: 0.4s ease-out;
+}
+#choose div{
+    color: #99AAB5;
+    margin-left: 50px;
+    text-align: center;
+    padding: 0;
+    width: 90px;
+    transition: 0.1s;
+    cursor: pointer;
+}
+#choose:hover #logIn{
+    border-bottom: solid 1px #7289DA;
+}
+#logIn {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid 1px #99AAB5;
+}
+#signUp{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#logIn:hover {
+    background: #7289DA;
     color: white;
 }
-
-#consoleInput {
-    background: -webkit-linear-gradient(330deg, #000, #505050);
-    background: linear-gradient(120deg, #000, #3f3f3f);
-    color: white;
+#signUp:hover {
+    background: #7289DA;
+    color:white;
 }
 
-#net {
-    background: -webkit-linear-gradient(330deg, #000, #505050);
-    background: linear-gradient(120deg, #000, #3f3f3f);
-    color: white;
+#ava {
+    display: none;
 }
-
-/* .wrapper {
-    display: grid;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: 85% 15%;
-    grid-gap: 10px;
-    padding: 10px;
-} */
+.logV {
+    margin-left:140px;
+}
+.formV {
+    margin-left: 300px;
+}
+.invalid {
+    border-bottom: solid 1px #6e1b28 !important;
+    color: #6e1b28 !important;
+}

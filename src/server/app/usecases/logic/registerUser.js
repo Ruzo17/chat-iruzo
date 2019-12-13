@@ -7,11 +7,12 @@ const manager = require('../../manager');
 const os = require('os');
 
 function registerUser(userName, password) {
-    let lock = manager.encrypt(userName+'[::@::]'+password, userName+'[::@::]'+password);
-    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+userName+'[::@::]'+lock;
-    
+    logger.debug(arguments.callee.name, ' ... ', userName);
+    let lock = manager.encrypt(userName+'[::@::]'+password);
+    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+userName+'[@]'+lock;
+
     if(process.platform == 'win32'){
-        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+userName+'[::@::]'+lock;
+        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+userName+'[@]'+lock;
     }
 
     manager.writeFile(filePath, lock);

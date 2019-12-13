@@ -3,16 +3,29 @@ const log4js = require('log4js');
 const logger = log4js.getLogger('['+process.pid+'] ' + require('path').basename(__filename).split(".")[0]);
 logger.level = "debug";
 
-const cryptojs = require('crypto-js');
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc';
+const key = Buffer.from('Hr5CfuE5WbCxfXDjPlGm5wAZ3Q3KPQLR', 'utf-8'); // const key = crypto.randomBytes(32);
+const iv = Buffer.from('00Tg5/tcRajzsAx%', 'utf-8'); // const iv = crypto.randomBytes(16);
 
-function encrypt(key, text) {
+const manager = require('../../manager');
+
+function encrypt(text) {
     logger.debug(arguments.callee.name, ' ... ', text);
-    return cryptojs.AES.encrypt(text, key).toString();
+    let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return encrypted.toString('hex');
 }
 
-function decrypt(key, text) {
-    logger.debug(arguments.callee.name, ' ... ');
-    return cryptojs.AES.decrypt(text, key).toString(cryptojs.enc.Utf8);
+function decrypt(text) {
+    logger.debug(arguments.callee.name, ' ... ', text);
+    let iv = Buffer.from(text.iv, 'hex');
+    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
 }
 
 module.exports = { decrypt, encrypt };

@@ -7,15 +7,15 @@ const manager = require('../../manager');
 const os = require('os');
 
 function loginUser(userName, password) {
-    let lock = manager.encrypt(userName+'[::@::]'+password, userName+'[::@::]'+password);
-    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+userName+'@'+lock;
+    let lock = manager.encrypt(userName+'[::@::]'+password);
+    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+userName+'[@]'+lock;
     
     if(process.platform == 'win32'){
-        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+userName+'@'+lock;
+        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+userName+'[@]'+lock;
     }
     let contactsFromFile = manager.readFile(filePath);
     if(!(null == manager.readFile(filePath))) {
-        let contactUser = new manager.contact.Contact(manager.getIp,41234,lock,userName,null,null,online);
+        let contactUser = new manager.contact.Contact(manager.getIp,41234,lock,userName,null,null,'online');
         let ipList = manager.getIpList();
         for (let i = 0; i < ipList.length; i++) {
             const current = ipList[i];
@@ -30,10 +30,11 @@ function loginUser(userName, password) {
                 ipList.splice(i, 1, contactUser);
             }
         }
-        manager.setActualLoggedUser(lock);
+        manager.setActualLoggedUser(new manager.contact.Contact(manager.getIp(), 41234, lock, userName, null, null, online));
         manager.sendDatagramMessage(lock+'[::@::]'+manager.messageTypeInfo.contactStatus+'[::@::]connected', manager.getIpList());
         return contactUser;
     } else {
+        logger.error(arguments.callee.name, ' ... profile not found');
         return false;
     }
 }

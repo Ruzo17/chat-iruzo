@@ -4,20 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" type="text/css" href="../themes/console.css">
-
-    <script type="text/javascript" src="console.js"></script>
-
-    <title>chat-iruzo</title>
+    <link rel="stylesheet" href="../themes/console.css">
+    <title>iRuzo</title>
 </head>
-<body>
-    <div style="display: flex;">
-        <textarea readonly class='consoleText' name="net" id="net" cols="50"  rows="31" style="width: 90%; padding-right: 9.5%"></textarea>
-        <div>
-            <textarea readonly class='consoleText' name="consoleOutput" id="consoleOutput" cols="200" rows="30" style="width: 90%; padding-right: 9.5%"></textarea>
-            <textarea          class='consoleText' name="consoleInput"  id="consoleInput"  cols="200" rows="1"  style="width: 90%; padding-right: 9.5%"></textarea>
+<body class="default" tabindex="0">
+    <div id="sectionl">
+        <div id="titul"><b>GENERAL</b></div>
+        <div>Address</div>
+    </div>
+    <div id="sectionc">
+        <div id="term">
+            <div class="men rec">Recibido</div>
+            <div class="men rec">Recibido</div>
+            <div class="men rec">Recibido</div>
+            <div class="men rec">Recibido</div>
+        </div>
+        <div id="formS" method="GET">
+            <input type="text" id="text" placeholder="Escribe un mensaje">
         </div>
     </div>
+    <div id="sectionr">
+        <div id="cabecera">
+            <div id="btnColap"><div class="colap"></div></div>
+            <p>Contactos</p>
+        </div>
+        <div id="contac">
+            <div class="user">
+                <div><img class="avatar" src="../img/generico.PNG" alt="ruzo" height="40px"></div>
+                <div>
+                    <p class="userName">Usuario</p>
+                    <p class="userStat">Estado</p>
+                </div>
+            </div>
+        </div>
+        <div id="usuario">
+            <div class="user">
+                <div id="ava"><img class="avatar" src="../img/generico.PNG" alt="ruzo" height="40px"></div>
+                <div id="userE">
+                    <p class="userName">Usuario2</p>
+                    <p class="userStat">Estado2</p>
+                </div>
+                <div id="log">
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="password" id="pass" placeholder="Pass">
+                </div>
+                <div id="choose">
+                    <div id="logIn">Entrar</div>
+                    <div id="signUp">Registrarse</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="console.js"></script>
 </body>
 </html>
