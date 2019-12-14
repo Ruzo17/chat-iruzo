@@ -6,7 +6,7 @@ logger.level = "debug";
 const manager = require('../../manager');
 
 function getPrivateMessages(contact) {
-    logger.debug(arguments.callee.name, ' ... ', contact);
+    logger.debug(arguments.callee.name, ' ... ', JSON.stringify(contact, null, 0));
 
     let privateChat = manager.getPrivateChat();
     let privateChatFiltered = new Array();

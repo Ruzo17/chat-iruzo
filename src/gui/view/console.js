@@ -9,6 +9,7 @@ const {Menu, MenuItem} = remote;
 
 const ip = new Menu();
 
+const sectionC = document.getElementById("sectionc");
 const signOut = document.getElementById("signout");
 const choose = document.getElementById("choose");
 const log = document.getElementById("log");
@@ -33,9 +34,10 @@ function init() {
     document.getElementById("btnColap").addEventListener("click", girar);
     document.getElementById("logIn").addEventListener("click", pasarFormE);
     document.getElementById("signUp").addEventListener("click", pasarFormR);
-    setInterval(getIpList, 5000);
-    setInterval(actualizarCont, 5000);
-    setInterval(actualizarChatG, 5000);
+    document.getElementById("titul").addEventListener("click", abrirGeneral);
+    setInterval(getIpList, 3000);
+    setInterval(actualizarCont, 500);
+    setInterval(actualizarChat, 500);
     logger.debug(document.getElementById("sectionc").getAttribute("data"));
     
 }
@@ -55,22 +57,62 @@ ip.append(new MenuItem({
 }));
 function desplazar(){choose.style.display = "none"; log.style.display = "flex"; signOut.style.display = "block";}
 function atras(){log.style.display = "none"; signOut.style.display = "none"; choose.classList.remove("logV"); choose.style.display = "block"; choose.removeEventListener("transitionend", desplazar);}
+
+function abrirChat(e){
+    let terminales = document.querySelectorAll(".term");
+    let conver = e.target.getAttribute("user");
+    let interruptor = true;
+    terminales.forEach(e => {
+        if(e.getAttribute("conver") == conver){
+            e.style.display = "block";
+            interruptor = false;
+        }else{
+            e.style.display = "none";
+        }
+    });
+    if(interruptor){
+        let terminal = document.createElement("div");
+        terminal.classList.add("term");
+        terminal.setAttribute("conver", conver);
+        console.log(terminal);
+        
+        sectionC.insertBefore(terminal, document.querySelector(".term"));
+    }
+    term = document.querySelector("div.term[conver='"+conver+"']");
+
+}
+function abrirGeneral(){
+
+    term = document.querySelector(".term[conver='g']");
+    let terminales = document.querySelectorAll(".term");
+    terminales.forEach(e => {
+        if(e == term){
+            e.style.display = "block";
+        }else{
+            e.style.display = "none";
+        }
+    });
+    
+}
 function actualizarCont(){
     let indice = 0;
     let contD = document.querySelectorAll("#contac > div");
     contD.forEach( e => lisContac.removeChild(e));
     contactos = srvApi.getContacts();
+    console.log(srvApi.getPrivateMessages(contactos[0]));
+    
     contactos.forEach(e => {
         
         let cont = document.createElement("div");
+        cont.addEventListener("click", abrirChat, false);
         cont.classList.add("user");
         cont.setAttribute("user", indice);
         cont.innerHTML = `
 
-            <div><img class="avatar" src="../img/generico.PNG" alt="ruzo" height="40px"></div>
-            <div>
-                <p class="userName">${e.userName}</p>
-                <p class="userStat">${e.status}</p>
+            <div user="${indice}"><img class="avatar" src="../img/generico.PNG" alt="ruzo" height="40px" user="${indice}"></div>
+            <div user="${indice}">
+                <p class="userName" user="${indice}">${e.userName}</p>
+                <p class="userStat" user="${indice}">${e.status}</p>
             </div>
 
         `;
@@ -86,7 +128,6 @@ function getIpList() {
     ips.forEach(e => sectionl.removeChild(e));
     usuarios = srvApi.getIpList();
     usuarios.forEach( e => {
-        console.log(e.id);
         
         let ipP = document.createElement("p");
         ipP.innerHTML = e.ip;
@@ -108,9 +149,13 @@ function enviar(){
     logger.debug(arguments.callee.name, " ... ");
     let text = document.getElementById("text");
     if(text.value.trim() != ""){
-        srvApi.sendGlobalMessage(text.value);
-        text.value   = "";
+        if(term.getAttribute("conver") == "g"){
+            srvApi.sendGlobalMessage(text.value);
+        }else{
+            srvApi.sendPrivateMessage(text.value, contactos[term.getAttribute("conver")]);
+        }
     }
+    text.value   = "";
 }
 function esContacto(ipM){
     srvApi.getContacts().forEach( e => {
@@ -121,11 +166,15 @@ function esContacto(ipM){
     );
     return false;
 }
-function actualizarChatG(){
+function actualizarChat(con){
     logger.debug(arguments.callee.name, " ... ");
     let mensajes = document.querySelectorAll(".term div");
     mensajes.forEach(e => e.parentElement.removeChild(e));
-    general = srvApi.getGlobalChat();
+    if(term.getAttribute("conver") ==  "g"){
+        general = srvApi.getGlobalChat();
+    }else{
+        general = srvApi.getPrivateMessages(contactos[term.getAttribute("conver")]);
+    }
     general.forEach( e => {
         let mensaje = document.createElement("div");
         let nombreContac = esContacto(e.split("[::@::]")[1]);
@@ -223,7 +272,6 @@ function logIn(){
 
         nombre.classList.add("invalid");
         pass.classList.add("invalid");
-        console.log("invalido");
 
     }
 }

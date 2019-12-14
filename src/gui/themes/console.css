@@ -179,6 +179,7 @@ div#titul:hover {
     height: 100%;
 }
 .user {
+    cursor: pointer;
     display: flex;
     margin: 10px;
     align-items: center;
