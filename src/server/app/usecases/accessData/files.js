@@ -36,6 +36,14 @@ function init() {
             logger.info('init ... The File was succesfully writed > '+filePath);
         }
     });
+
+    fs.writeFile(filePath, 'globalChatLog', (err) => {
+        if(err) {
+            console.error('init ... ', err);
+        } else {
+            logger.info('init ... The File was succesfully writed > '+filePath);
+        }
+    });
 }
 
 function writeFile(filePath, info) {
