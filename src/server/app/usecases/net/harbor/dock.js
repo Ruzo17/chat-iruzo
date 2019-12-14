@@ -31,7 +31,7 @@ function sendDatagramMessage(msg, contacts) {
     contacts.forEach(c => {
         datagramDock.send(msg, 0, msg.length, 41234, c.ip, (stderr, stdout) => {
             if(stderr) logger.error('sendDatagramMessage:onSend ... ' + stderr);
-            logger.info('sendDatagramMessage:onSend ... ' + c.ip + ':' + c.port + '@' + c.id + ' => ' + stdout.toString('utf-8'));
+            logger.info('sendDatagramMessage:onSend ... ' + c.ip + ':' + c.port + '@' + c.id + ' => ' + stdout);
         });
     });
 }
