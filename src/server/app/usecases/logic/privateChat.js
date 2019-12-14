@@ -30,11 +30,6 @@ function getPrivateMessages(contact) {
 function sendPrivateMessage(msg, contact) {
     logger.debug(arguments.callee.name, ' ... ', contact, ' > ', msg);
 
-    if(contact.id == null) {
-        manager.addToPrivateChat(new Date().toJSON()+'[::@::]'+contact.ip+'[::@::]'+msg+'[::@::]me');
-    } else {
-        manager.addToPrivateChat(new Date().toJSON()+'[::@::]'+contact.id+'[::@::]'+msg+'[::@::]me');
-    }
     let contacts = new Array();
     contacts.push(contact);
     manager.sendDatagramMessage(manager.messageTypeInfo.privateMessage+'[::@::]'+msg, contacts);
