@@ -14,11 +14,11 @@ function getPrivateMessages(contact) {
     for (let i = 0; i < privateChat.length; i++) {
         const current = privateChat[i];
         if(contactAdded) {
-            if(current.id == contact.id){
+            if(current.indexOf(contact.id)) {
                 privateChatFiltered.push(current);
             }
         } else {
-            if(current.ip == contact.ip){
+            if(current.indexOf(contact.ip)) {
                 privateChatFiltered.push(current);
             }
         }
