@@ -153,10 +153,6 @@ function enviar(){
             srvApi.sendGlobalMessage(text.value);
         }else{
             srvApi.sendPrivateMessage(text.value, contactos[term.getAttribute("conver")]);
-            let mensaje = document.createElement("div");
-            mensaje.classList.add("sub");
-            mensaje.innerHTML = text.value;
-            term.appendChild(mensaje);
         }
     }
     text.value   = "";
@@ -176,38 +172,67 @@ function actualizarChat(con){
     mensajes.forEach(e => e.parentElement.removeChild(e));
     if(term.getAttribute("conver") ==  "g"){
         general = srvApi.getGlobalChat();
+        general.forEach( e => {
+            let mensaje = document.createElement("div");
+            let nombreContac = esContacto(e.split("[::@::]")[1]);
+            mensaje.innerHTML = text.value;
+            mensaje.classList.add("men");
+            if(e.split("[::@::]")[1] == srvApi.getIp()){
+    
+                mensaje.classList.add("sub");
+                mensaje.innerHTML = e.split("[::@::]")[2];
+    
+            }else if(nombreContac){
+                mensaje.classList.add("rec");
+                mensaje.innerHTML = `
+    
+                    <i>${nombreContac} :</i>${e.split("[::@::]")[2]}
+                
+                `;
+            }else{
+                mensaje.classList.add("rec");
+                mensaje.innerHTML = `
+    
+                    <i>${e.split("[::@::]")[1]} :</i>${e.split("[::@::]")[2]}
+                
+                `;
+            }
+            term.appendChild(mensaje);
+            term.scrollTo(0,term.scrollHeight);
+    
+        });
     }else{
         general = srvApi.getPrivateMessages(contactos[term.getAttribute("conver")]);
+        general.forEach( e => {
+            let mensaje = document.createElement("div");
+            let nombreContac = esContacto(e.split("[::@::]")[1]);
+            mensaje.innerHTML = text.value;
+            mensaje.classList.add("men");
+            if(e.split("[::@::]").length == 4){
+    
+                mensaje.classList.add("sub");
+                mensaje.innerHTML = e.split("[::@::]")[2];
+    
+            }else if(nombreContac){
+                mensaje.classList.add("rec");
+                mensaje.innerHTML = `
+    
+                    <i>${nombreContac} :</i>${e.split("[::@::]")[2]}
+                
+                `;
+            }else{
+                mensaje.classList.add("rec");
+                mensaje.innerHTML = `
+    
+                    <i>${e.split("[::@::]")[1]} :</i>${e.split("[::@::]")[2]}
+                
+                `;
+            }
+            term.appendChild(mensaje);
+            term.scrollTo(0,term.scrollHeight);
+    
+        });
     }
-    general.forEach( e => {
-        let mensaje = document.createElement("div");
-        let nombreContac = esContacto(e.split("[::@::]")[1]);
-        mensaje.innerHTML = text.value;
-        mensaje.classList.add("men");
-        if(e.split("[::@::]")[1] == srvApi.getIp()){
-
-            mensaje.classList.add("sub");
-            mensaje.innerHTML = e.split("[::@::]")[2];
-
-        }else if(nombreContac){
-            mensaje.classList.add("rec");
-            mensaje.innerHTML = `
-
-                <i>${nombreContac} :</i>${e.split("[::@::]")[2]}
-            
-            `;
-        }else{
-            mensaje.classList.add("rec");
-            mensaje.innerHTML = `
-
-                <i>${e.split("[::@::]")[1]} :</i>${e.split("[::@::]")[2]}
-            
-            `;
-        }
-        term.appendChild(mensaje);
-        term.scrollTo(0,term.scrollHeight);
-
-    });
 }
 function girar(e){
     logger.debug(arguments.callee.name, " ... ");
