@@ -21,6 +21,7 @@ function loginUser(userName, password) { return manager.processLoginUser(userNam
 function disconnectUser(userName) { return manager.processDisconnectUser(userName); }
 
 function addFriend(contact) { manager.addFriend(contact); }
+function removeFriend(contact) { manager.removeFriend(contact); }
 function getContacts() { return manager.getContacts(); }
 
 
@@ -37,5 +38,6 @@ module.exports.loginUser = loginUser;
 module.exports.disconnectUser = disconnectUser;
 
 module.exports.addFriend = addFriend;
+module.exports.removeFriend = removeFriend;
 
 module.exports.getContacts = getContacts;

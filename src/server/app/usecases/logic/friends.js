@@ -40,7 +40,6 @@ function addFriend(contact) {
 function removeFriend(contact) {
     logger.debug(arguments.callee.name, ' ... ', contact);
     let contactsFromMemory = manager.getContacts();
-    let contactAux = null;
     for (let i = 0; i < contactsFromMemory.length; i++) {
         const current = contactsFromMemory[i];
         if(current.id = contact.id) {

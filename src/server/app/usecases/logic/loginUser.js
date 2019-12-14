@@ -30,7 +30,7 @@ function loginUser(userName, password) {
         manager.setActualLoggedUser(new manager.contact.Contact(manager.getIp(), 41234, lock, userName, null, null, 'online'));
         manager.setContacts(contactsFromFile);
         manager.setIpList(ipList);
-        manager.sendDatagramMessage(lock+'[::@::]'+manager.messageTypeInfo.contactStatus+'[::@::]connected', manager.getIpList());
+        manager.sendDatagramMessage(userName+'[...@...]'+lock+'[::@::]'+manager.messageTypeInfo.contactStatus+'[::@::]connected', manager.getIpList());
         return contactUser;
     } else {
         logger.error(arguments.callee.name, ' ... profile not found');

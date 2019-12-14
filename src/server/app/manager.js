@@ -49,6 +49,7 @@ function processLoginUser(userName, password) { return loginUser.loginUser(userN
 function processDisconnectUser(userName) { return disconnectUser.disconnectUser(userName); }
 
 function addFriend(contact) { friends.addFriend(contact); }
+function removeFriend(contact) { friends.removeFriend(contact); }
 
 function sendPrivateMessage(msg, contact) { privateChat.sendPrivateMessage(msg, contact); }
 function getPrivateMessages(contact) { return privateChat.getPrivateMessages(contact); }
@@ -94,6 +95,7 @@ module.exports.processLoginUser =       processLoginUser;
 module.exports.processDisconnectUser =  processDisconnectUser;
 
 module.exports.addFriend =              addFriend;
+module.exports.removeFriend =           removeFriend;
 
 module.exports.sendPrivateMessage =     sendPrivateMessage;
 module.exports.sendGlobalMessage =      sendGlobalMessage;

@@ -10,6 +10,7 @@ function processContactStatus(msg) {
 
     let msgArray = msg.split('[::@::]');
     if(msgArray.length == 5) {
+        let nameId = msgArray[2].split('[...@...]');
         let contacts = manager.getContacts();
         let existContact = false;
         for (let i = 0; i < contacts.length; i++) {
@@ -18,7 +19,7 @@ function processContactStatus(msg) {
                 if(msgArray[4] == 'disconnect') {
                     contacts.splice(i, 1);
                 } else {
-                    let contactAux = new manager.contact.Contact(current.ip, current.port, msgArray[2], current.userName, current.nickName, current.alias, msgArray[4]);
+                    let contactAux = new manager.contact.Contact(current.ip, current.port, nameId[1], nameId[0], current.nickName, current.alias, msgArray[4]);
                     contacts.splice(i, 1, contactAux);
                 }
                 existContact = true;
@@ -32,12 +33,12 @@ function processContactStatus(msg) {
         for (let i = 0; i < ipList.length; i++) {
             const current = ipList[i];
             if(current.ip == msgArray[1]){
-                ipList.splice(i, 1, new manager.contact.Contact(current.ip, current.port, msgArray[2], current.userName, current.nickName, current.alias, msgArray[4]));
+                ipList.splice(i, 1, new manager.contact.Contact(current.ip, current.port, nameId[1], nameId[0], current.nickName, current.alias, msgArray[4]));
                 existIp = true;
             }
         }
         if(!existIp) {
-            ipList.push(new manager.contact.Contact(msgArray[1], 41234, msgArray[2], null, null, null, msgArray[4]));
+            ipList.push(new manager.contact.Contact(msgArray[1], 41234, nameId[1], nameId[0], null, null, msgArray[4]));
         }
         manager.setIpList(ipList);
     } else {
