@@ -153,6 +153,10 @@ function enviar(){
             srvApi.sendGlobalMessage(text.value);
         }else{
             srvApi.sendPrivateMessage(text.value, contactos[term.getAttribute("conver")]);
+            let mensaje = document.createElement("div");
+            mensaje.classList.add("sub");
+            mensaje.innerHTML = text.value;
+            term.appendChild(mensaje);
         }
     }
     text.value   = "";
