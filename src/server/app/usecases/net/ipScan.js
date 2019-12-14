@@ -41,7 +41,7 @@ function netScan() {
               }
             }
             if(!containsIp) manager.addToIpList(new manager.contact.Contact(ipOn, null, null, null, null, null, null));
-          } else if(stdout.indexOf("ping statistics") > -1) {
+          } else if((stdout.indexOf("ping statistics") > -1) && !(stdout.indexOf('Destination Host Unreachable') > -1)) {
             ipOn = stdout.split("(")[1].split(")")[0];
             let containsIp = false;
             let ipList = manager.getIpList();
