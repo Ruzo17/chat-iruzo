@@ -8,6 +8,7 @@ const {remote} = require('electron');
 const {Menu, MenuItem} = remote;
 
 const ip = new Menu();
+const contacto = new Menu();
 
 const sectionC = document.getElementById("sectionc");
 const signOut = document.getElementById("signout");
@@ -24,6 +25,7 @@ var contactos;
 var usuarios;
 var usu;
 var cr;
+var cr1;
 
 srvApi.init();
 window.onload = init;
@@ -55,9 +57,16 @@ ip.append(new MenuItem({
     label: "Añadir a contactos",
     click(){anadirContacto();}
 }));
+contacto.append(new MenuItem({
+    label: "Borrar contacto",
+    click(){borrarC();}
+}));
 function desplazar(){choose.style.display = "none"; log.style.display = "flex"; signOut.style.display = "block";}
 function atras(){log.style.display = "none"; signOut.style.display = "none"; choose.classList.remove("logV"); choose.style.display = "block"; choose.removeEventListener("transitionend", desplazar);}
 
+function borrarC(){
+    srvApi.removeFriend(contactos[cr1.getAttribute("user")]);
+}
 function abrirChat(e){
     let terminales = document.querySelectorAll(".term");
     let conver = e.target.getAttribute("user");
@@ -105,6 +114,11 @@ function actualizarCont(){
         
         let cont = document.createElement("div");
         cont.addEventListener("click", abrirChat, false);
+        cont.addEventListener('contextmenu', (e) => {
+            cr1 = e.target;
+            e.preventDefault();
+            contacto.popup(remote.getCurrentWindow());
+        }, false);
         cont.classList.add("user");
         cont.setAttribute("user", indice);
         cont.innerHTML = `
@@ -167,7 +181,6 @@ function esContacto(ipM){
     return false;
 }
 function actualizarChat(con){
-    logger.debug(arguments.callee.name, " ... ");
     let mensajes = document.querySelectorAll(".term div");
     mensajes.forEach(e => e.parentElement.removeChild(e));
     if(term.getAttribute("conver") ==  "g"){

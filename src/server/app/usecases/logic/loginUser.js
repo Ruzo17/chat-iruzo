@@ -16,7 +16,7 @@ function loginUser(userName, password) {
     if(!(null == manager.readFile(filePath))) {
         let contactsFromFile = new Array();
         let fileContent = manager.readFile(filePath);
-        if(!(fileContent == lock)){
+        if(!(fileContent == lock || fileContent == '')){
             contactsFromFile = JSON.parse(fileContent);
         }
         let contactUser = new manager.contact.Contact(manager.getIp(),41234,lock,userName,null,null,'online');
