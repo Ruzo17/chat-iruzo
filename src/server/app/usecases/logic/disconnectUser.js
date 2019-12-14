@@ -8,14 +8,7 @@ const os = require('os');
 
 function disconnectUser(userName) {
     let actualLoggedUser = manager.getActualLoggedUser();
-    let contactList = manager.getContacts();
-    for (let i = contactList.length; i >= 0; i--) {
-        const current = contactList[i];
-        if(current != undefined && current.id == actualLoggedUser.id) {
-            contactList.splice(i, 1);
-        }
-    }
-    manager.setContacts(contactList);
+    manager.setContacts(new Array());
     manager.sendDatagramMessage(actualLoggedUser.id+'[::@::]'+manager.messageTypeInfo.contactStatus+'[::@::]disconnect', manager.getIpList());
     manager.setActualLoggedUser(null);
 }
