@@ -13,9 +13,13 @@ function loginUser(userName, password) {
     if(process.platform == 'win32'){
         filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+userName+'[@]'+lock;
     }
-    let contactsFromFile = manager.readFile(filePath);
     if(!(null == manager.readFile(filePath))) {
-        let contactUser = new manager.contact.Contact(manager.getIp,41234,lock,userName,null,null,'online');
+        let contactsFromFile = new Array();
+        let fileContent = manager.readFile(filePath);
+        if(!(fileContent == lock)){
+            contactsFromFile = JSON.parse(fileContent);
+        }
+        let contactUser = new manager.contact.Contact(manager.getIp(),41234,lock,userName,null,null,'online');
         let ipList = manager.getIpList();
         for (let i = 0; i < ipList.length; i++) {
             const current = ipList[i];
@@ -23,14 +27,9 @@ function loginUser(userName, password) {
                 ipList.splice(i, 1, contactUser);
             }
         }
-        let contactList = manager.getContacts();
-        for (let i = 0; i < contactList.length; i++) {
-            const current = contactList[i];
-            if(current.ip == contactUser.ip) {
-                ipList.splice(i, 1, contactUser);
-            }
-        }
-        manager.setActualLoggedUser(new manager.contact.Contact(manager.getIp(), 41234, lock, userName, null, null, online));
+        manager.setActualLoggedUser(new manager.contact.Contact(manager.getIp(), 41234, lock, userName, null, null, 'online'));
+        manager.setContacts(contactsFromFile);
+        manager.setIpList(ipList);
         manager.sendDatagramMessage(lock+'[::@::]'+manager.messageTypeInfo.contactStatus+'[::@::]connected', manager.getIpList());
         return contactUser;
     } else {

@@ -85,7 +85,7 @@ div#titul:hover {
     background: #7289DA;
     border-radius: 10px;
 }
-#term {
+.term {
     overflow: auto;
     height: 90%;
     padding-left:5%;
@@ -114,6 +114,9 @@ div#titul:hover {
     background:rgba(153, 170, 181, 0.418);
     color: #FFFFFF;
     text-align: start;
+}
+.rec i{
+    color: rgba(255, 255, 255, 0.514);
 }
 #formS {
     display: flex;
@@ -269,4 +272,11 @@ div#titul:hover {
 .invalid {
     border-bottom: solid 1px #6e1b28 !important;
     color: #6e1b28 !important;
+}
+#signout {
+    position:fixed;
+    bottom: 20px;
+    right: 5px;
+    cursor: pointer;
+    display: none;
 }

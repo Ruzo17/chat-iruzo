@@ -9,14 +9,11 @@ function init() {
     manager.init();
 }
 
+function getIp() { return manager.getIp(); }
 function getIpList() { return manager.getIpList(); }
-/**
- * * El mensaje debe de ir formateado de la siguiente manera: messageTypeInfo[::@::]mensaje
- * ! No saltarse bajo ningun concepto la estructura de formateo de los mensajes mencionada con anterioridad.
- */
 function sendPrivateMessage(msg, contact) { manager.sendPrivateMessage(msg, contact); }
 function sendGlobalMessage(msg) { manager.sendGlobalMessage(msg); }
-function getGlobalChat() { manager.getGlobalChat(); }
+function getGlobalChat() { return manager.getGlobalChat(); }
 function getPrivateMessages(contact) { return manager.getPrivateMessages(contact); }
 
 function registerUser(userName, password) { return manager.processRegisterUser(userName, password); }
@@ -24,11 +21,11 @@ function loginUser(userName, password) { return manager.processLoginUser(userNam
 function disconnectUser(userName) { return manager.processDisconnectUser(userName); }
 
 function addFriend(contact) { manager.addFriend(contact); }
-
 function getContacts() { return manager.getContacts(); }
 
 
 module.exports.init = init;
+module.exports.getIp = getIp;
 module.exports.getIpList = getIpList;
 module.exports.sendPrivateMessage = sendPrivateMessage;
 module.exports.sendGlobalMessage = sendGlobalMessage;

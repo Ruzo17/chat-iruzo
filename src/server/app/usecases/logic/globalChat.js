@@ -8,7 +8,6 @@ const manager = require('../../manager');
 function sendGlobalMessage(msg) {
     logger.debug(arguments.callee.name, ' ... ', msg);
 
-    manager.addToGlobalChat(new Date().toJSON()+'[::@::]'+manager.getIp()+'[::@::]'+msg);
     manager.sendDatagramMessage(manager.messageTypeInfo.globalMessage+'[::@::]'+msg, manager.getIpList());
 }
 

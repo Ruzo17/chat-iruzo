@@ -8,20 +8,48 @@ const os = require('os');
 
 function addFriend(contact) {
     logger.debug(arguments.callee.name, ' ... ', contact);
-    manager.addToContacts(contact);
     let actualLoggedUser = manager.getActualLoggedUser();
-    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+actualLoggedUser.userName+'[@]'+lock;
+    let filePath = os.homedir() + '/chat-iruzo/loginProfiles/'+actualLoggedUser.userName+'[@]'+actualLoggedUser.id;
     if(process.platform == 'win32'){
-        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+actualLoggedUser.userName+'[@]'+lock;
+        filePath = os.homedir() + '\\chat-iruzo\\loginProfiles\\'+actualLoggedUser.userName+'[@]'+actualLoggedUser.id;
     }
-    let contactsFromFile = JSON.parse(manager.readFile(filePath));
-    contactsFromFile.push(contact);
-    manager.writeFile(filePath, JSON.stringify(contactsFromFile, null, 0));
+    let fileContent = manager.readFile(filePath);
+    if(fileContent == actualLoggedUser.id){
+        let contactsToFile = new Array();
+        contactsToFile.push(contact);
+        manager.writeFile(filePath, JSON.stringify(contactsToFile, null, 0));
+        manager.addToContacts(contact);
+    } else {
+        let contactsFromFile = JSON.parse(fileContent);
+        let existContact = false;
+        for (let i = 0; i < contactsFromFile.length; i++) {
+            const current = contactsFromFile[i];
+            if(current.id == contact.id) {
+                contactsFromFile.splice(i, 1, contact);
+                existContact = true;
+            }
+        }
+        if(!existContact) {
+            contactsFromFile.push(contact);
+        }
+        manager.setContacts(contactsFromFile);
+        manager.writeFile(filePath, JSON.stringify(contactsFromFile, null, 0));
+    }
 }
 
 function removeFriend(contact) {
     logger.debug(arguments.callee.name, ' ... ', contact);
-    // TODO
+    let contactsFromMemory = manager.getContacts();
+    let contactAux = null;
+    for (let i = 0; i < contactsFromMemory.length; i++) {
+        const current = contactsFromMemory[i];
+        if(current.id = contact.id) {
+            contactAux = current;
+            contactsFromMemory.splice(i, 1);
+        }
+    }
+    manager.setContacts(contactsFromMemory);
+    manager.writeFile(filePath, contactsFromMemory);
 }
 
 module.exports = { addFriend, removeFriend };

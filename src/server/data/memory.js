@@ -35,7 +35,7 @@ module.exports.getPrivateChat = function getPrivateChat() { logger.debug(argumen
 module.exports.addToPrivateChat = function addToPrivateChat(args) { logger.debug(arguments.callee.name, " ... ", JSON.stringify(args, null, 0)); privateChat.push(args);}
 
 module.exports.getActualLoggedUser = function getActualLoggedUser() { logger.debug(arguments.callee.name, ' ... ', JSON.stringify(actualLoggedUser, null, 0)); return actualLoggedUser; }
-module.exports.setActualLoggedUser = function setActualLoggedUser(userId) { logger.debug(arguments.callee.name, " ... ", userId); actualLoggedUser = userId;}
+module.exports.setActualLoggedUser = function setActualLoggedUser(userId) { logger.debug(arguments.callee.name, " ... ", JSON.stringify(userId, null, 0)); actualLoggedUser = userId;}
 
 // * models
 module.exports.contact = contact;

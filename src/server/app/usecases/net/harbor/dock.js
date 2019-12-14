@@ -27,7 +27,7 @@ function init(localhost) {
     
 //datagramDock
 function sendDatagramMessage(msg, contacts) {
-    logger.debug(arguments.callee.name, ' ... ');
+    logger.debug(arguments.callee.name, ' ... ', msg);
     contacts.forEach(c => {
         datagramDock.send(msg, 0, msg.length, 41234, c.ip, (stderr, stdout) => {
             if(stderr) logger.error('sendDatagramMessage:onSend ... ' + stderr);
