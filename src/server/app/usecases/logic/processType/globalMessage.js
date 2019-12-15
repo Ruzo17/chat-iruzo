@@ -8,6 +8,7 @@ const os = require('os');
 
 function processGlobalMessage(msg) {
     let msgArray = msg.split('[::@::]');
+    filePath = os.homedir() + '/chat-iruzo/globalChatLog';
     if(process.platform == 'win32'){
         filePath = os.homedir() + '\\chat-iruzo\\globalChatLog';
     }
